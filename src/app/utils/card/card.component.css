@@ -1,0 +1,11 @@
+mat-card{
+    margin:25px;
+}
+mat-divider{
+    padding: 10px;
+}
+
+
+.animate__animated.animate__fadeInDown {
+    --animate-duration: 2s;
+  }

@@ -1,0 +1,87 @@
+<app-card titulo="Registros HIS">
+  <button mat-raised-button color="primary" class="item-l large-width" (click)="EnvioMasivo()">Envio Masivo</button>
+
+
+  <hr class="hr">
+  <!--<ngx-json-viewer [json]="this.verdatajson"></ngx-json-viewer>
+  <p>{{this.verdatajson | json}}</p>-->
+  <div class="container">
+    <form [formGroup]="range">
+      <mat-form-field class="item">
+        <mat-label>Ingresar rango de fecha</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+          <input matStartDate formControlName="start" placeholder="Start date">
+          <input matEndDate formControlName="end" placeholder="End date">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <p class="item fecha-class"> <span class="negrita">Fecha seleccionada:</span> {{ range.value.start | date:
+        'dd/MM/yyyy' }} - {{ range.value.end | date: 'dd/MM/yyyy' }}</p>
+
+      <button mat-raised-button (click)="cargarData()" color="primary" class="item" [disabled]="range.invalid">Buscar
+        Fecha</button>
+    </form>
+  </div>
+  <div>
+    <table mat-table matSort [dataSource]="datasource" #tabla1>
+      <ng-container matColumnDef="IdAtencion">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>IdAtencion</th>
+        <td mat-cell *matCellDef="let data">{{ data.IdAtencion }}</td>
+      </ng-container>
+      <ng-container matColumnDef="idcita">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> TokenEnvio</th>
+        <td mat-cell *matCellDef="let data">{{ data.idcita }}</td>
+      </ng-container>
+      <ng-container matColumnDef="enviarData">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Remitir</th>
+        <td mat-cell *matCellDef="let data">          
+          <button *ngIf="!data.idcita" mat-raised-button color="primary"  matTooltipPosition="right" matTooltip="Envio Trama" (click)="EnviarUnidad(data)" [disabled]="btnEstado">Enviar</button>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="detalles">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Detalles</th>
+        <td mat-cell *matCellDef="let data">          
+            <div class="example-button-row">
+                <app-detalletrama [data]="data"></app-detalletrama>
+            </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let data">          
+          <span *ngIf="data.idcita">
+            <div class="success icon-container">
+              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="done_all"></mat-icon>
+              <div class="text-icon">Enviado</div> 
+            </div>
+          </span>
+          <span *ngIf="!data.idcita">
+            <div class="b icon-container">
+              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="privacy_tip"></mat-icon>
+              <div class="text-icon">Pendiente</div> 
+            </div>
+          </span>  
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fecha">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>fecha</th>
+        <td mat-cell *matCellDef="let data">          
+            {{data.fechaRegistro | date: 'yyyy-MM-dd HH:mm:ss' }}
+        </td>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="ColumnasMostrar"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ColumnasMostrar"></mat-row>
+    </table>
+    <ng-container footer>
+      <mat-paginator [pageSizeOptions]="[10,20,100]" [showFirstLastButtons]="true">
+      </mat-paginator>
+    </ng-container>
+  </div>
+</app-card>
