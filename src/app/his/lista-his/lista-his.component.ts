@@ -41,11 +41,13 @@ export class ListaHisComponent implements OnInit {
       this.datasource.paginator = this.paginator;
       this.datasource.sort = this.sort;
     })*/
+    this.sweetService.loading();
     this.hiservices.findByFechas(this.range.value).subscribe(data=>{
       this.datageneral = data
      this.datasource = new MatTableDataSource<any>(this.datageneral);
       this.datasource.paginator = this.paginator;
       this.datasource.sort = this.sort; 
+      this.sweetService.close();
     })
   }
 

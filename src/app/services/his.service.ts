@@ -17,7 +17,7 @@ export class HisService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
-    const apiprueba1='http://localhost:4001/http://dpidesalud.minsa.gob.pe:18080/mcs-sihce-hisminsa/integracion/v1.0/paquete/actualizar'
+    const apiprueba1=environment.apiproxyinterno    
     return this.http.post<any>(apiprueba1, data,{headers});
   }
  
