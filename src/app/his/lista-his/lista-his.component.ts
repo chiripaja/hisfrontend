@@ -62,6 +62,7 @@ export class ListaHisComponent implements OnInit {
 
 this.hiservices.enviarhis(tramaHis).pipe(
   concatMap(data => {
+    console.log(data)
     // Dentro de concatMap, se ejecuta this.hiservices.registarHisGalenosTabla()
     const datosCita = {
       fechaActual: new Date().toISOString().slice(0, 19).replace('T', ' '),
