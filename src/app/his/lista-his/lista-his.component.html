@@ -25,6 +25,7 @@
     </form>
   </div>
   <div>
+    <mat-progress-bar mode="indeterminate" *ngIf="progressbarState"></mat-progress-bar>
     <table mat-table matSort [dataSource]="datasource" #tabla1>
       <ng-container matColumnDef="IdAtencion">
         <th mat-sort-header mat-header-cell *matHeaderCellDef>IdAtencion</th>
@@ -37,7 +38,8 @@
       <ng-container matColumnDef="enviarData">
         <th mat-sort-header mat-header-cell *matHeaderCellDef>Remitir</th>
         <td mat-cell *matCellDef="let data">          
-          <button *ngIf="!data.idcita" mat-raised-button color="primary"  matTooltipPosition="right" matTooltip="Envio Trama" (click)="EnviarUnidad(data)" [disabled]="btnEstado">Enviar</button>
+          <button *ngIf="false" mat-raised-button color="primary"  matTooltipPosition="right" matTooltip="Envio Trama" (click)="EnviarUnidad(data)" [disabled]="btnEstado">Enviar</button>
+          <button *ngIf="!data.idcita" mat-raised-button color="primary"  matTooltipPosition="right" matTooltip="Envio Trama" (click)="EnviarUnidadApi(data)" [disabled]="btnEstado">Enviar </button>
         </td>
       </ng-container>
 
