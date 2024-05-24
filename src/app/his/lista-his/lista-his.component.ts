@@ -33,6 +33,7 @@ export class ListaHisComponent {
   cargarData() {
     this.sweetService.loading();
     this.hiservices.findByFechas(this.range.value).subscribe(data => {
+      console.log(data)
       this.datageneral = data
       this.datasource = new MatTableDataSource<any>(this.datageneral);
       this.datasource.paginator = this.paginator;
@@ -41,32 +42,6 @@ export class ListaHisComponent {
     })
   }
 
-  EnviarUnidad(data: any) {
-/*
-    const { IdAtencion, IdPaciente, fechaRegistro, idcita, ...tramaHis } = data;
-    this.verdatajson = tramaHis;
-    this.hiservices.enviarhis(tramaHis).pipe(
-      concatMap(data => {
-        const datosCita = {
-          fechaActual: new Date().toISOString().slice(0, 19).replace('T', ' '),
-          idcitatoken: parseInt(data.idCita),
-          idatencion: IdAtencion
-        };
-        return this.hiservices.registarHisGalenosTabla(datosCita);
-      })
-    ).subscribe(
-      data => {
-        this.cargarData();
-        this.btnEstado = false;
-        this.sweetService.close();
-      },
-      error => {
-        this.btnEstado = false;
-        console.log(error);
-        this.sweetService.mostrarMensajeError(error.error.descripcion);
-      }
-    );*/
-  }
 
   EnvioMasivo() {
     this.progressbarState = true;

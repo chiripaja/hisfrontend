@@ -38,7 +38,6 @@
       <ng-container matColumnDef="enviarData">
         <th mat-sort-header mat-header-cell *matHeaderCellDef>Remitir</th>
         <td mat-cell *matCellDef="let data">          
-          <button *ngIf="false" mat-raised-button color="primary"  matTooltipPosition="right" matTooltip="Envio Trama" (click)="EnviarUnidad(data)" [disabled]="btnEstado">Enviar</button>
           <button *ngIf="!data.idcita" mat-raised-button color="primary"  matTooltipPosition="right" matTooltip="Envio Trama" (click)="EnviarUnidadApi(data)" [disabled]="btnEstado">Enviar </button>
         </td>
       </ng-container>
@@ -47,9 +46,10 @@
       <ng-container matColumnDef="detalles">
         <th mat-sort-header mat-header-cell *matHeaderCellDef>Detalles</th>
         <td mat-cell *matCellDef="let data">          
-            <div class="example-button-row">
-                <app-detalletrama [data]="data"></app-detalletrama>
-            </div>
+     
+
+            <app-detalletrama [data]="data"></app-detalletrama>
+    
         </td>
       </ng-container>
 
