@@ -31,15 +31,15 @@ export class ListaHisComponent {
   datasource: any;
 
   cargarData() {
-    this.sweetService.loading();
+    this.sweetService.loading();   
     this.hiservices.findByFechas(this.range.value).subscribe(data => {
-      console.log(data)
+      console.log(data)    
       this.datageneral = data
       this.datasource = new MatTableDataSource<any>(this.datageneral);
       this.datasource.paginator = this.paginator;
       this.datasource.sort = this.sort;
       this.sweetService.close();
-    })
+    })/**/
   }
 
 
@@ -51,7 +51,7 @@ export class ListaHisComponent {
     })
     this.progressbarState = false
     console.log(promises)
-   
+
   }
 
   fb = inject(FormBuilder)
@@ -67,8 +67,8 @@ export class ListaHisComponent {
   }
 
   EnviarUnidadApi(data: any) {
-    this.sweetService.loading();
     this.btnEstado = true;
+    this.sweetService.loading();
     const { IdAtencion, IdPaciente, fechaRegistro, idcita, ...tramaHis } = data;
     this.hiservices.enviarApiHisData(tramaHis).subscribe((data: any) => {
       this.btnEstado = false;
@@ -90,5 +90,6 @@ export class ListaHisComponent {
       this.btnEstado = false;
       this.sweetService.mostrarMensajeError(error.error.message);
     })
+
   }
 }

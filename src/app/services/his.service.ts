@@ -9,6 +9,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 export class HisService {
   private apiURL = environment.apiURL + 'his';  
   private http=inject(HttpClient)
+  private idservicios="37,1407"
   findListaHist(){
     return this.http.get(this.apiURL)
   }
@@ -26,11 +27,13 @@ export class HisService {
   }
 
   findByFechas(data:any):Observable<any>{
-    return this.http.post(this.apiURL+'/findByFechas',data);
+    const dataenvio=data;
+    dataenvio.servicios=this.idservicios
+    return this.http.post(this.apiURL+'/findByFechas',dataenvio);
   }
 
   enviarApiHisData(data:any){
-    console.log(data)
+
     return this.http.post(this.apiURL+'/enviarApiHisData',data);
   }
 
